@@ -370,6 +370,14 @@ footer {
 .hero-text{
     word-wrap: break-word;
 }
+/* Make contact form fully responsive on mobile */
+.contact-form input,
+.contact-form textarea {
+    box-sizing: border-box;       /* ensures width includes padding */
+    font-size: 1rem;              /* smaller text on mobile */
+    word-wrap: break-word;        /* breaks long words */
+    overflow-wrap: break-word;    /* safety for long words */
+}
 }
 
 
