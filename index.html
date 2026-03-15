@@ -378,17 +378,18 @@
             box-sizing: border-box;
         }
 
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            max-width: 100%;
-            padding: 12px;
-            font-size: 1rem;
-            box-sizing: border-box;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            border-radius: 8px;
-        }
+       .contact-form input,
+    .contact-form textarea {
+        width: 100% !important;       /* force full width */
+        min-width: 0 !important;      /* allow it to shrink */
+        box-sizing: border-box;       /* includes padding in width */
+        overflow: hidden;             /* hide overflow just in case */
+        white-space: normal;          /* allow line breaks inside textarea */
+        word-break: break-word;       /* break long words */
+        word-wrap: break-word;
+        font-size: 1rem;              /* ensure readable text */
+        padding: 12px;                /* keep padding reasonable */
+    }
 
         .contact-form button {
             width: 100%;
