@@ -307,111 +307,138 @@
     }
 
     /* ========================= */
-    /* MOBILE RESPONSIVE DESIGN */
+    /* MOBILE RESPONSIVE DESIGN  */
     /* ========================= */
-    @media (max-width: 768px){
+    @media (max-width: 768px) {
 
-        body{
+        body {
             flex-direction: column;
         }
 
-        .sidebar{
-            display:none;
+        .sidebar {
+            display: none;
         }
 
-        .main{
-            margin-left:0;
-            width:100%;
-        }
-        .navbar{
-            justify-content:center;
-            flex-wrap:wrap;
-            gap:8px;
-            padding:10px;
+        .main {
+            margin-left: 0;
+            width: 100%;
         }
 
-        .navbar a{
-            margin-left:0;
-            font-size:0.85rem;
-        }
-        .hero-text{
-            left:15px;
-            right:15px;
-            width:auto;
-        }
-        .hero-text h1{
-            font-size:1.8rem;
+        .navbar {
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            padding: 10px;
+            height: auto;
         }
 
-        .hero-text p{
-            font-size:1rem;
+        .navbar a {
+            margin-left: 0;
+            font-size: 0.85rem;
         }
 
-        .section-title{
-            font-size:2rem;
+        /* ✅ FIX: Reduce section padding on mobile */
+        .section-content {
+            padding: 60px 20px;
         }
 
-        .grid-2{
-            grid-template-columns:1fr;
+        .hero-text {
+            left: 15px;
+            right: 15px;
+            width: auto;
         }
 
-        .grid-3{
-            grid-template-columns:1fr;
+        .hero-text h1 {
+            font-size: 1.8rem;
         }
 
-        .education{
+        .hero-text p {
+            font-size: 1rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: 1fr;
+        }
+
+        .grid-3 {
+            grid-template-columns: 1fr;
+        }
+
+        .education {
             flex-direction: column;
         }
 
         .card-common,
         .edu-card,
-        .hero-text{
+        .hero-text {
             word-wrap: break-word;
         }
 
-        /* Mobile Contact Form */
+        /* ✅ FIX: Contact container stacks and fits properly */
         .contact-container {
             grid-template-columns: 1fr;
-            padding: 20px;
-            gap: 20px;
+            padding: 25px 20px;
+            gap: 30px;
+            border-radius: 16px;
             width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* ✅ FIX: Contact info text wraps on small screens */
+        .contact-item span {
+            font-size: 0.95rem;
+            word-break: break-all;
+        }
+
+        /* ✅ FIX: Inputs cannot exceed their parent */
+        .contact-form {
+            width: 100%;
+            min-width: 0;
             box-sizing: border-box;
         }
 
-       .contact-form input,
-    .contact-form textarea {
-        width: 100% !important;       /* force full width */
-        min-width: 0 !important;      /* allow it to shrink */
-        box-sizing: border-box;       /* includes padding in width */
-        overflow: hidden;             /* hide overflow just in case */
-        white-space: normal;          /* allow line breaks inside textarea */
-        word-break: break-word;       /* break long words */
-        word-wrap: break-word;
-        font-size: 1rem;              /* ensure readable text */
-        padding: 12px;                /* keep padding reasonable */
-    }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            min-width: 0;
+            box-sizing: border-box;
+            padding: 12px;
+            font-size: 1rem;
+            word-break: break-word;
+        }
 
         .contact-form button {
             width: 100%;
             padding: 12px;
             font-size: 1rem;
         }
-        @media (max-width: 480px) {
-    .contact-form {
-        padding: 15px;
     }
 
-    .contact-form input,
-    .contact-form textarea {
-        font-size: 14px;
-        padding: 8px;
-    }
+    /* ✅ FIX: Moved outside the 768px block — was nested before (invalid) */
+    @media (max-width: 480px) {
+        .section-content {
+            padding: 50px 15px;
+        }
 
-    .contact-form button {
-        font-size: 14px;
-        padding: 10px;
-    }
-}
+        .contact-container {
+            padding: 20px 15px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            font-size: 14px;
+            padding: 10px;
+        }
+
+        .contact-form button {
+            font-size: 14px;
+            padding: 10px;
+        }
     }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
