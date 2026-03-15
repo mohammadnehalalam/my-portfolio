@@ -358,10 +358,7 @@ footer {
         grid-template-columns:1fr;
     }
 
-    .contact-container{
-        grid-template-columns:1fr;
-        padding:40px 20px;
-    }
+    
     .education{
     flex-direction: column;
 }
@@ -371,12 +368,35 @@ footer {
     word-wrap: break-word;
 }
 /* Make contact form fully responsive on mobile */
-.contact-form input,
-.contact-form textarea {
-    box-sizing: border-box;       /* ensures width includes padding */
-    font-size: 1rem;              /* smaller text on mobile */
-    word-wrap: break-word;        /* breaks long words */
-    overflow-wrap: break-word;    /* safety for long words */
+
+    /* Contact container takes full width */
+    .contact-container {
+        grid-template-columns: 1fr;   /* single column */
+        padding: 20px;                /* smaller padding */
+        gap: 20px;                    /* reduce gap */
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Inputs and textarea fully responsive */
+    .contact-form input,
+    .contact-form textarea {
+        width: 100%;                  /* full width */
+        max-width: 100%;              /* prevents overflow */
+        padding: 12px;                /* smaller padding on mobile */
+        font-size: 1rem;              /* readable size */
+        box-sizing: border-box;       /* includes padding in width */
+        word-wrap: break-word;        /* break long words */
+        overflow-wrap: break-word;    /* safety for long words */
+        border-radius: 8px;           /* slightly smaller rounding */
+    }
+
+    /* Adjust submit button */
+    .contact-form button {
+        width: 100%;                  /* full width button */
+        padding: 12px;
+        font-size: 1rem;
+    }
 }
 }
 
