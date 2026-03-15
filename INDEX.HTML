@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohammad Nehal Alam | Portfolio</title>
+
+<style>
+    html{
+scroll-behavior:smooth;
+}
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background: #ffffff00;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* LEFT SIDEBAR */
+.sidebar {
+    width: 240px;
+    background: #0f172a;
+    color: #f8fafc;
+    padding-top: 50px;
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+    border-right: 4px solid #0077ff;
+}
+
+.sidebar ul { list-style: none; }
+.sidebar ul li a {
+    padding: 18px 30px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.4s ease;
+   
+    align-items: center;
+    position: relative;
+     text-decoration: none;   /* removes underline */
+    color: inherit;           /* keeps original text color */
+    display: block;
+}
+
+.sidebar ul li a:hover {
+    background: rgba(9, 101, 194, 0.15);
+    color: #38bdf8;
+    padding-left: 40px;
+}
+
+/* MAIN CONTENT */
+.main {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    display: flex;
+    flex-direction: column;
+}
+
+/* NAVBAR */
+.navbar {
+    height: 60px;
+    background: #0f172a;
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 40px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+.navbar a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: #e1e7f0;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.navbar a:hover { color: #00d9ff; }
+
+/* HERO SECTION */
+.hero {
+    height: 90vh;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    filter: brightness(60%) contrast(110%);
+}
+
+.hero img.active { opacity: 1; }
+
+.hero-text {
+    position: absolute;
+    bottom: 10%;
+    left: 60px;
+    color: white;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 40px;
+    border-radius: 20px;
+    z-index: 10;
+    border-left: 8px solid #0077ff;
+    backdrop-filter: blur(5px);
+}
+
+.hero-text h1 { font-size: 3rem; margin-bottom: 10px; }
+.hero-text p { font-size: 1.2rem; color: #38bdf8; }
+
+/* CONTENT SECTIONS */
+.section-content {
+    padding: 100px 80px;
+}
+
+.section-title {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 70px;
+    color: #0f172a;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.block-h2 {
+    margin-bottom: 30px;
+    color: #1e293b;
+    font-size: 2rem;
+    position: relative;
+    padding-left: 20px;
+}
+
+.block-h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    height: 70%;
+    width: 6px;
+    background: #0077ff;
+    border-radius: 10px;
+}
+
+/* Education Cards */
+.education {
+    display: flex;
+    gap: 30px;
+}
+
+.edu-card {
+    background: #ffffff;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    flex: 1;
+    transition: all 0.4s ease;
+    border: 1px solid rgba(0, 119, 255, 0.1);
+}
+
+.edu-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0, 119, 255, 0.15); }
+
+/* Grids */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+/* Skills */
+.skill { margin-bottom: 20px; }
+.skill p { margin-bottom: 10px; font-weight: 600; color: #1e293b; }
+.skill-bar { width: 100%; height: 14px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+.skill-level { height: 100%; border-radius: 10px; }
+
+/* Vibrant Skill Colors */
+.html { width: 92%; background: linear-gradient(90deg, #ff416c, #ff4b2b); }
+.css { width: 88%; background: linear-gradient(90deg, #2193b0, #6dd5ed); }
+.js { width: 75%; background: linear-gradient(90deg, #f7971e, #ffd200); }
+.php { width: 82%; background: linear-gradient(90deg, #6a11cb, #2575fc); }
+.laravel { width: 78%; background: linear-gradient(90deg, #ff0844, #ffb199); }
+.content-write { width: 95%; background: linear-gradient(90deg, #00b09b, #96c93d); }
+
+/* Card Common Styling */
+.card-common {
+    background: #1e293b;
+    color: #fff;
+    border-radius: 20px;
+    transition: 0.4s;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-common::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(30, 41, 59, 0.3), rgba(15, 23, 42, 0.95));
+    z-index: -1;
+}
+
+.card-common:hover { transform: translateY(-10px); }
+
+/* Achievement Specific Styling */
+.achievement-img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-bottom: 3px solid #0077ff;
+}
+
+.achievement-info {
+    padding: 25px;
+}
+
+.achievement-info h3 { color: #38bdf8; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;}
+.achievement-info p { font-size: 0.95rem; margin-bottom: 8px; color: #cbd5e1; }
+.achievement-info .org { color: #fff; font-weight: 600; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;}
+.achievement-info .date { color: #0077ff; font-weight: bold; font-size: 0.85rem; }
+
+/* Project Backgrounds */
+.light-pollution-card { background-image: url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80'); min-height: 250px; justify-content: flex-end; padding: 30px; }
+.nature-card { background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80'); min-height: 250px; justify-content: flex-end; padding: 30px; }
+.school-web-card { background-image: url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800&q=80'); min-height: 250px; justify-content: flex-end; padding: 30px; }
+.portfolio-card { background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80'); min-height: 250px; justify-content: flex-end; padding: 30px; }
+
+/* CONTACT SECTION */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 50px;
+    background: #1e293b;
+    padding: 60px;
+    border-radius: 30px;
+    color: white;
+}
+
+.contact-info h3 { font-size: 2rem; color: #38bdf8; margin-bottom: 20px; }
+.contact-item { margin-bottom: 25px; display: flex; align-items: center; gap: 15px; }
+.contact-item span { font-size: 1.1rem; color: #cbd5e1; }
+
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: white;
+    outline: none;
+}
+
+.contact-form button {
+    padding: 15px 40px;
+    background: #0077ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.contact-form button:hover { background: #38bdf8; transform: scale(1.05); }
+
+/* FOOTER */
+footer {
+    padding: 40px;
+    text-align: center;
+    background: #0f172a;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+/* ========================= */
+/* MOBILE RESPONSIVE DESIGN */
+/* ========================= */
+@media (max-width: 768px){
+
+    body{
+        flex-direction: column;
+    }
+
+    /* Hide sidebar menu */
+    .sidebar{
+        display:none;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+    }
+.navbar{
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    padding:10px;
+}
+
+.navbar a{
+    margin-left:0;
+    font-size:0.85rem;
+}
+.hero-text{
+    left:15px;
+    right:15px;
+    width:auto;
+}
+    .hero-text h1{
+        font-size:1.8rem;
+    }
+
+    .hero-text p{
+        font-size:1rem;
+    }
+
+    .section-title{
+        font-size:2rem;
+    }
+
+    .grid-2{
+        grid-template-columns:1fr;
+    }
+
+    .grid-3{
+        grid-template-columns:1fr;
+    }
+
+    .contact-container{
+        grid-template-columns:1fr;
+        padding:40px 20px;
+    }
+    .education{
+    flex-direction: column;
+}
+.card-common,
+.edu-card,
+.hero-text{
+    word-wrap: break-word;
+}
+}
+
+
+
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <div style="padding: 0 30px 40px; font-weight: 900; font-size: 1.5rem;">NEHAL.DEV</div>
+    <ul>
+        <li><a href="#Home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#Project">Projects</a></li>
+        <li><a href="#Achievement">Achievements</a></li>
+        <li><a href="#Contact">Contact</a></li>
+    </ul>
+</div>
+
+<div class="main">
+    <div class="navbar">
+
+    <a href="#Home">Home</a>
+    <a href="#about">About</a>
+    <a href="#Project">Projects</a>
+    <a href="#Achievement">Achievements</a>
+    <a href="#Contact">Contact</a>
+
+    <span style="margin-left:40px;"></span>
+
+    <!-- Social Icons -->
+    <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Flinkedin.com%2Fin%2Fmohammad-nehal-alam-228393284%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExcU4xcUpqdFQ1NmxMcVdCbHNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR49NpWcAJJSWn0j-DlHA7iFY--UeKJcUQ8fgMgx7ZUajY0xit6h4DO5vuRMMQ_aem_l7cixItinuq2uz5WunnM9A&h=AT7Mk3aPueRLMrimBIBVFekOq4Aa8oezJ2Gela_Au2-MOxuhteTnNZfQ9S-cagK4emXMVHQXxETdMS--Kv3GTBlQuMdMCmVdZ4uq9gj0J5IauGbW4BeU_1EFqc8Z98uCXm0h" target="_blank">
+        <i class="fab fa-linkedin"></i>
+    </a>
+
+    <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Fgithub.com%2Fmohammadnehalalam%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExcU4xcUpqdFQ1NmxMcVdCbHNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR49NpWcAJJSWn0j-DlHA7iFY--UeKJcUQ8fgMgx7ZUajY0xit6h4DO5vuRMMQ_aem_l7cixItinuq2uz5WunnM9A&h=AT5K2gOjEnc0_Bh4SL3_8ThnupMQ0-PL4skc12P6vMkqleYfj9l_rHqdq1kYVEUGaE_etvtLrNfU_WWsycl3gqgIBg4ZfdLRo8ZIbTlxrq0vufSs5fw6fV4M2ZBuWeNYYdU3Lw" target="_blank">
+        <i class="fab fa-github"></i>
+    </a>
+
+    <a href="https://www.facebook.com/share/1CMYexKv3J/" target="_blank">
+        <i class="fab fa-facebook"></i>
+    </a>
+
+    <span style="margin-left:30px;"></span>
+
+    <a href="cv.pdf" download>DOWNLOAD CV</a>
+
+</div>
+
+    <div id="Home" class="hero">
+        <img src="NEHAL (2).jpg" class="slide active">
+        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80" class="slide">
+        <div class="hero-text">
+            <h1>MOHAMMAD NEHAL ALAM</h1>
+            <p>Researcher | Science Student | WEB DEVELOPER</p>
+        </div>
+    </div>
+
+    <section id="about"class="section-content" style="background: #f1f5f9;">
+        <h1 class="section-title">About Me</h1>
+        <div style="display: flex; flex-direction: column; gap: 80px;">
+            <div class="block">
+                <h2 class="block-h2">My Background</h2>
+                <div class="education">
+                    <div class="edu-card">
+                        <h3>UNDERGRADUATION</h3>
+                        <p><strong>University:</strong> Shahjalal University of Science and Technology</p>
+                        <p><strong>B.Sc.</strong> in Biochemistry and Molecular Biology</p>
+                    </div>
+                    <div class="edu-card">
+                        <h3>HSC</h3>
+                        <p><strong>College:</strong> Govt Science College, Dhaka</p>
+                        <p><strong>Grade:</strong> GPA 5.00</p>
+                    </div>
+                    <div class="edu-card">
+                        <h3>SSC</h3>
+                        <p><strong>School:</strong> Monipur High School</p>
+                        <p><strong>Grade:</strong> GPA 5.00</p>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="block">
+                <h2 class="block-h2">Skills</h2>
+                <div class="grid-2">
+                    <div class="skill"><p>HTML</p><div class="skill-bar"><div class="skill-level html"></div></div></div>
+                    <div class="skill"><p>CSS</p><div class="skill-bar"><div class="skill-level css"></div></div></div>
+                    <div class="skill"><p>JavaScript</p><div class="skill-bar"><div class="skill-level js"></div></div></div>
+                    <div class="skill"><p>PHP</p><div class="skill-bar"><div class="skill-level php"></div></div></div>
+                    <div class="skill"><p>Laravel</p><div class="skill-bar"><div class="skill-level laravel"></div></div></div>
+                    <div class="skill"><p>Content Writing</p><div class="skill-bar"><div class="skill-level content-write"></div></div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Project" class="section-content">
+        <h1 class="section-title">Projects</h1>
+        <div style="display: flex; flex-direction: column; gap: 80px;">
+            <div class="block">
+                <h2 class="block-h2">1. Environmental Project</h2>
+                <div class="grid-2">
+                    <div class="card-common light-pollution-card">
+                        <h3>Light Pollution</h3>
+                        <p>Detailed research on how artificial night light disrupts ecosystems and human health.</p>
+                    </div>
+                    <div class="card-common nature-card">
+                        <h3>Nature Conservation</h3>
+                        <p>Strategic analysis of local environmental protection and sustainability.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <h2 class="block-h2">2. IT Project</h2>
+                <div class="grid-2">
+                    <div class="card-common school-web-card">
+                        <h3>School Website</h3>
+                        <p>A full-featured educational platform built for student and teacher management.</p>
+                    </div>
+                    <div class="card-common portfolio-card">
+                        <h3>Web Portfolio</h3>
+                        <p>Modern personal branding site showcasing research and development expertise.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Achievement" class="section-content" style="background: #f1f5f9;">
+        <h1 class="section-title">Achievements</h1>
+        <div class="grid-3">
+            <div class="card-common">
+                <img src="OLYMPIAD.jpg" alt="Olympiad" class="achievement-img">
+                <div class="achievement-info">
+                    <h3>🏆 Olympiads</h3>
+                    <p>• Bangladesh Biology Olympiad 2nd Runners Up (Regional)</p>
+                    <p>• National Bangladesh Earth Olympiad Participant</p>
+                    <p class="org">Organization: BDBO, NEO</p>
+                    <p class="date">Date: 2023 - 2024</p>
+                </div>
+            </div>
+
+            <div class="card-common">
+                <img src="DARK.png" alt="Dark Sky" class="achievement-img">
+                <div class="achievement-info">
+                    <h3>⭐ Dark Sky Rising Star Award</h3>
+                    <p>Recognized for outstanding efforts in dark sky advocacy and research.</p>
+                    <p class="org">Organization: DarkSky International</p>
+                    <p class="date">Date: 2025</p>
+                </div>
+            </div>
+
+            <div class="card-common">
+                <img src="PROJECT.JPG" alt="Science Festival" class="achievement-img">
+                <div class="achievement-info">
+                    <h3>🥈 5th BAFSD National Science Fest</h3>
+                    <p>1st Runners Up at Project Display competition.</p>
+                    <p class="org">Organization: BAF Shaheen College Dhaka</p>
+                    <p class="date">Date: 2024</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="Contact" class="section-content">
+        <h1 class="section-title">Get In Touch</h1>
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Info</h3>
+                <div class="contact-item">
+                    <span>📍 Dhaka, Bangladesh</span>
+                </div>
+                <div class="contact-item">
+                    <span>📧 mohammadnehalalam8@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <span>🔗 phone numeber:+8801540372913</span>
+                </div>
+            </div>
+            <div class="contact-form">
+                <input type="text" placeholder="Your Name">
+                <input type="email" placeholder="Your Email">
+                <textarea rows="5" placeholder="Your Message"></textarea>
+                <button type="submit">Send Message</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Mohammad Nehal Alam. All Rights Reserved.</p>
+    </footer>
+</div>
+
+<script>
+let slides = document.querySelectorAll(".slide");
+let index = 0;
+setInterval(() => {
+    slides[index].classList.remove("active");
+    index = (index + 1) % slides.length;
+    slides[index].classList.add("active");
+}, 5000);
+</script>
+
+</body>
+</html>
