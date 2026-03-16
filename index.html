@@ -392,13 +392,6 @@
         background: linear-gradient(to top, rgba(10,15,30,0.95) 60%, transparent);
         width: 100%;
     }
-
-    .project-card-body a,
-    .project-card-body span {
-        cursor: pointer;
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: rgba(0,119,255,0.3);
-    }
     
     .contact-container {
         display: grid;
@@ -456,13 +449,11 @@
         opacity: 0;
         transform: translateY(40px);
         transition: opacity 0.7s ease, transform 0.7s ease;
-        pointer-events: none;
     }
 
     .reveal.visible {
         opacity: 1;
         transform: translateY(0);
-        pointer-events: auto;
     }
 
     /* ========================= */
@@ -743,7 +734,7 @@
                         <div class="project-card-body">
                             <h3>Light Pollution</h3>
                             <p>Assessing Artificial Light Intensity in Dhaka City</p>
-                            <a href="lp.html" style="display:inline-block;margin-top:14px;padding:10px 20px;background:#0077ff;color:white;border-radius:8px;font-size:0.85rem;font-weight:600;text-decoration:none;touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,119,255,0.3);">View Project →</a>
+                            <a href="lp.html" style="display:inline-block;margin-top:14px;padding:10px 20px;background:#0077ff;color:white;border-radius:8px;font-size:0.85rem;font-weight:600;text-decoration:none;">View Project →</a>
                         </div>
                     </div>
                     
@@ -867,7 +858,12 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.classList.add('visible');
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+// Fallback: force all reveals visible after 1.5s in case observer fails on mobile
+setTimeout(() => {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+}, 1500);
 
 // Hamburger hide on scroll
 let scrollTimer;
