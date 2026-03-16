@@ -324,7 +324,6 @@
         inset: 0;
         background: linear-gradient(to bottom, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.75));
         z-index: 0;
-        pointer-events: none;
     }
 
     .card-common > * {
@@ -382,12 +381,11 @@
         object-fit: contain;
         object-position: center;
         background: #0a0f1e;
-        pointer-events: none;
     }
 
     .project-card-body {
         position: relative;
-        z-index: 3;
+        z-index: 2;
         padding: 24px 28px;
         background: linear-gradient(to top, rgba(10,15,30,0.95) 60%, transparent);
         width: 100%;
@@ -508,10 +506,12 @@
         z-index: 150;
         opacity: 0;
         transition: opacity 0.3s ease;
+        pointer-events: none;
     }
 
     .sidebar-overlay.active {
         opacity: 1;
+        pointer-events: auto;
     }
 
     /* ========================= */
@@ -858,28 +858,9 @@ const observer = new IntersectionObserver((entries) => {
             entry.target.classList.add('visible');
         }
     });
-}, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+}, { threshold: 0.1 });
 
-// Fallback: force all reveals visible after 1.5s in case observer fails on mobile
-setTimeout(() => {
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
-}, 1500);
-
-// Hamburger hide on scroll
-let scrollTimer;
-window.addEventListener('scroll', () => {
-    if (window.innerWidth <= 768 && !sidebar.classList.contains('open')) {
-        hamburger.style.opacity = '0';
-        hamburger.style.pointerEvents = 'none';
-        clearTimeout(scrollTimer);
-        scrollTimer = setTimeout(() => {
-            hamburger.style.opacity = '1';
-            hamburger.style.pointerEvents = 'auto';
-        }, 800);
-    }
-});
-
-// Hamburger menu toggle
+// Hamburger menu toggle — declared HERE, before the scroll listener below
 const hamburger = document.getElementById('hamburger');
 const sidebar = document.getElementById('sidebar');
 const overlay = document.getElementById('sidebarOverlay');
@@ -908,6 +889,20 @@ sidebar.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
         if (window.innerWidth <= 768) closeSidebar();
     });
+});
+
+// Hamburger hide on scroll
+let scrollTimer;
+window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 768 && !sidebar.classList.contains('open')) {
+        hamburger.style.opacity = '0';
+        hamburger.style.pointerEvents = 'none';
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+            hamburger.style.opacity = '1';
+            hamburger.style.pointerEvents = 'auto';
+        }, 800);
+    }
 });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
