@@ -394,12 +394,10 @@
     }
 
     .project-card-body a,
-    .light-pollution-card > a {
-        position: relative;
-        z-index: 4;
+    .project-card-body span {
+        cursor: pointer;
         touch-action: manipulation;
-        -webkit-tap-highlight-color: rgba(0,119,255,0.2);
-        display: inline-block;
+        -webkit-tap-highlight-color: rgba(0,119,255,0.3);
     }
     
     .contact-container {
@@ -458,11 +456,13 @@
         opacity: 0;
         transform: translateY(40px);
         transition: opacity 0.7s ease, transform 0.7s ease;
+        pointer-events: none;
     }
 
     .reveal.visible {
         opacity: 1;
         transform: translateY(0);
+        pointer-events: auto;
     }
 
     /* ========================= */
@@ -576,16 +576,6 @@
         .card-common,
         .edu-card,
         .hero-text { word-wrap: break-word; }
-
-        /* Ensure project buttons are easily tappable on mobile */
-        .project-card-body a[href],
-        .project-card-body span {
-            display: inline-block;
-            min-height: 44px;
-            line-height: 44px;
-            padding: 0 18px;
-            touch-action: manipulation;
-        }
 
         .about-intro { padding: 25px 20px; }
 
@@ -748,16 +738,14 @@
             <div class="block reveal">
                 <h2 class="block-h2">1. Environmental Project</h2>
                 <div class="grid-2">
-                    <a href="lp.html" style="text-decoration:none;">
                     <div class="card-common light-pollution-card">
                         <img src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80" alt="Light Pollution" class="project-card-img">
                         <div class="project-card-body">
                             <h3>Light Pollution</h3>
                             <p>Assessing Artificial Light Intensity in Dhaka City</p>
-                            <span style="display:inline-block;margin-top:14px;padding:7px 18px;background:#0077ff;color:white;border-radius:8px;font-size:0.85rem;font-weight:600;">View Project →</span>
+                            <a href="lp.html" style="display:inline-block;margin-top:14px;padding:10px 20px;background:#0077ff;color:white;border-radius:8px;font-size:0.85rem;font-weight:600;text-decoration:none;touch-action:manipulation;-webkit-tap-highlight-color:rgba(0,119,255,0.3);">View Project →</a>
                         </div>
                     </div>
-                    </a>
                     
                 </div>
             </div>
