@@ -33,58 +33,149 @@
         height: 100vh;
         z-index: 100;
         border-right: 4px solid #0077ff;
+        display: none;
     }
 
     .sidebar ul { list-style: none; }
     .sidebar ul li a {
         padding: 18px 30px;
         cursor: pointer;
-        font-size: 1.1rem;
+        font-size: 1.15rem;
         font-weight: 500;
-        transition: all 0.4s ease;
+        transition: all 0.3s ease;
         align-items: center;
         position: relative;
         text-decoration: none;
         color: inherit;
         display: block;
+        border-left: 3px solid transparent;
     }
 
     .sidebar ul li a:hover {
-        background: rgba(9, 101, 194, 0.15);
+        background: rgba(0, 119, 255, 0.18);
         color: #38bdf8;
-        padding-left: 40px;
+        padding-left: 42px;
+        border-left: 3px solid #00d9ff;
+        letter-spacing: 0.5px;
+    }
+
+    .sidebar-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 24px 30px;
+        border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .sidebar-social {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 16px;
+    }
+
+    .sidebar-social a {
+        color: #94a3b8;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: rgba(255,255,255,0.05);
+        border: 1px solid rgba(255,255,255,0.08);
+        text-decoration: none;
+    }
+
+    .sidebar-social a:hover {
+        color: #00d9ff;
+        background: rgba(0, 119, 255, 0.2);
+        border-color: rgba(0, 217, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
+    .sidebar-cv {
+        display: block;
+        text-align: center;
+        padding: 10px;
+        background: linear-gradient(135deg, #0077ff, #00d9ff);
+        color: white;
+        border-radius: 10px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: none;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar-cv:hover {
+        opacity: 0.88;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 119, 255, 0.4);
     }
 
     .main {
-        margin-left: 240px;
-        width: calc(100% - 240px);
+        margin-left: 0;
+        width: 100%;
         display: flex;
         flex-direction: column;
     }
 
     .navbar {
-        height: 60px;
-        background: #0f172a;
-        backdrop-filter: blur(10px);
+        height: 68px;
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: none !important;
         display: flex;
         align-items: center;
         justify-content: flex-end;
         padding: 0 40px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        position: sticky;
+        box-shadow: none !important;
+        position: absolute;
         top: 0;
+        left: 240px;
+        right: 0;
         z-index: 50;
     }
 
     .navbar a {
-        margin-left: 30px;
+        margin-left: 28px;
         text-decoration: none;
         color: #e1e7f0;
         font-weight: 600;
-        transition: 0.3s;
+        font-size: 1rem;
+        letter-spacing: 0.4px;
+        padding: 6px 14px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        position: relative;
     }
 
-    .navbar a:hover { color: #00d9ff; }
+    .navbar a::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 14px;
+        right: 14px;
+        height: 2px;
+        background: linear-gradient(90deg, #0077ff, #00d9ff);
+        border-radius: 2px;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .navbar a:hover {
+        color: #00d9ff;
+        background: rgba(0, 119, 255, 0.15);
+        transform: translateY(-2px);
+    }
+
+    .navbar a:hover::after {
+        transform: scaleX(1);
+    }
 
     .hero {
         height: 90vh;
@@ -128,7 +219,7 @@
     }
 
     .section-title {
-        font-size: 3rem;
+        font-size: 3.2rem;
         text-align: center;
         margin-bottom: 70px;
         color: #0f172a;
@@ -140,7 +231,7 @@
     .block-h2 {
         margin-bottom: 30px;
         color: #1e293b;
-        font-size: 2rem;
+        font-size: 2.1rem;
         position: relative;
         padding-left: 20px;
     }
@@ -166,7 +257,7 @@
     }
 
     .about-intro p {
-        font-size: 1.05rem;
+        font-size: 1.12rem;
         color: #334155;
         line-height: 1.9;
     }
@@ -230,28 +321,75 @@
     .card-common::before {
         content: '';
         position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: linear-gradient(to bottom, rgba(30, 41, 59, 0.3), rgba(15, 23, 42, 0.95));
-        z-index: -1;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.75));
+        z-index: 0;
+    }
+
+    .card-common > * {
+        position: relative;
+        z-index: 1;
     }
 
     .card-common:hover { transform: translateY(-10px); }
 
-    .achievement-img {
-        height: 200px;
-        width: 100%;
-        object-fit: cover;
-        border-bottom: 3px solid #0077ff;
+    .achievement-card {
+        background: #1e293b;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        position: relative;
     }
 
-    .achievement-info { padding: 25px; }
-    .achievement-info h3 { color: #38bdf8; margin-bottom: 10px; font-size: 1.25rem; display: flex; align-items: center; gap: 10px;}
-    .achievement-info p { font-size: 0.95rem; margin-bottom: 8px; color: #cbd5e1; }
-    .achievement-info .org { color: #fff; font-weight: 600; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px;}
+    .achievement-card::before {
+        display: none !important;
+    }
+
+    .achievement-img-wrapper {
+        width: 100%;
+        height: 220px;
+        overflow: hidden;
+        flex-shrink: 0;
+    }
+
+    .achievement-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+
+    .achievement-info {
+        padding: 22px 25px;
+        background: #1e293b;
+        flex: 1;
+    }
+    .achievement-info h3 { color: #38bdf8; margin-bottom: 10px; font-size: 1.15rem; display: flex; align-items: center; gap: 8px; }
+    .achievement-info p { font-size: 0.92rem; margin-bottom: 8px; color: #cbd5e1; }
+    .achievement-info .org { color: #fff; font-weight: 600; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 10px; }
     .achievement-info .date { color: #0077ff; font-weight: bold; font-size: 0.85rem; }
 
-    .light-pollution-card { background-image: url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80'); min-height: 250px; justify-content: flex-end; padding: 30px; }
-    .school-web-card { background-image: url('https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800&q=80'); min-height: 250px; justify-content: flex-end; padding: 30px; }
+    .light-pollution-card { min-height: 320px; justify-content: flex-end; padding: 0; }
+    .school-web-card { min-height: 320px; justify-content: flex-end; padding: 0; }
+
+    .project-card-img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0; left: 0;
+        object-fit: contain;
+        object-position: center;
+        background: #0a0f1e;
+    }
+
+    .project-card-body {
+        position: relative;
+        z-index: 2;
+        padding: 24px 28px;
+        background: linear-gradient(to top, rgba(10,15,30,0.95) 60%, transparent);
+        width: 100%;
+    }
     
     .contact-container {
         display: grid;
@@ -317,30 +455,96 @@
     }
 
     /* ========================= */
+    /* MOBILE HAMBURGER MENU     */
+    /* ========================= */
+    .hamburger {
+        display: none;
+        position: fixed;
+        top: 16px;
+        right: 20px;
+        z-index: 300;
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 10px;
+        width: 44px;
+        height: 44px;
+        cursor: pointer;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        transition: all 0.3s ease, opacity 0.3s ease;
+    }
+
+    .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: #e1e7f0;
+        border-radius: 2px;
+        transition: all 0.35s ease;
+        transform-origin: center;
+    }
+
+    .hamburger.open span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+    .hamburger.open span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    .hamburger.open span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 150;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .sidebar-overlay.active {
+        opacity: 1;
+    }
+
+    /* ========================= */
     /* MOBILE RESPONSIVE DESIGN  */
     /* ========================= */
     @media (max-width: 768px) {
 
         body { flex-direction: column; }
 
-        .sidebar { display: none; }
+        .hamburger { display: flex; }
+
+        .sidebar {
+            display: block;
+            position: fixed;
+            left: -260px;
+            top: 0;
+            height: 100vh;
+            width: 240px;
+            z-index: 200;
+            transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: none;
+        }
+
+        .sidebar.open {
+            left: 0;
+            box-shadow: 4px 0 30px rgba(0,0,0,0.4);
+        }
+
+        .sidebar-overlay { display: block; }
+
+        .navbar { display: none; }
 
         .main {
             margin-left: 0;
             width: 100%;
-        }
-
-        .navbar {
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 10px;
-            height: auto;
-        }
-
-        .navbar a {
-            margin-left: 0;
-            font-size: 0.85rem;
         }
 
         .section-content { padding: 60px 20px; }
@@ -414,7 +618,17 @@
 </head>
 <body>
 
-<div class="sidebar">
+<!-- Mobile hamburger button -->
+<button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span>
+    <span></span>
+    <span></span>
+</button>
+
+<!-- Sidebar overlay (mobile) -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="sidebar" id="sidebar">
     <div style="padding: 0 30px 40px; font-weight: 900; font-size: 1.5rem;">NEHAL.DEV</div>
     <ul>
         <li><a href="#Home">Home</a></li>
@@ -423,6 +637,14 @@
         <li><a href="#Achievement">Achievements</a></li>
         <li><a href="#Contact">Contact</a></li>
     </ul>
+    <div class="sidebar-bottom">
+        <div class="sidebar-social">
+            <a href="https://linkedin.com/in/mohammad-nehal-alam-228393284" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="https://github.com/mohammadnehalalam" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.facebook.com/share/1CMYexKv3J/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        </div>
+        <a href="cv.pdf" download class="sidebar-cv">⬇ Download CV</a>
+    </div>
 </div>
 
 <div class="main">
@@ -507,9 +729,12 @@
                 <div class="grid-2">
                     <a href="lp.html" style="text-decoration:none;">
                     <div class="card-common light-pollution-card">
-                        <h3>Light Pollution</h3>
-                        <p>Assessing Artificial Light Intensity in Dhaka City</p>
-                        <span style="display:inline-block;margin-top:14px;padding:7px 18px;background:#0077ff;color:white;border-radius:8px;font-size:0.85rem;font-weight:600;">View Project →</span>
+                        <img src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=800&q=80" alt="Light Pollution" class="project-card-img">
+                        <div class="project-card-body">
+                            <h3>Light Pollution</h3>
+                            <p>Assessing Artificial Light Intensity in Dhaka City</p>
+                            <span style="display:inline-block;margin-top:14px;padding:7px 18px;background:#0077ff;color:white;border-radius:8px;font-size:0.85rem;font-weight:600;">View Project →</span>
+                        </div>
                     </div>
                     </a>
                     
@@ -520,9 +745,12 @@
                 <h2 class="block-h2">2. IT Project</h2>
                 <div class="grid-2">
                     <div class="card-common school-web-card">
-                        <h3>School Website</h3>
-                        <p>A full-featured educational platform built for student and teacher management.</p>
-                        <a href="https://github.com/mohammadnehalalam/School-website" target="_blank" style="display:inline-block;margin-top:14px;padding:7px 18px;background:#0077ff;color:white;border-radius:8px;font-size:0.85rem;font-weight:600;text-decoration:none;">View Code →</a>
+                        <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=800&q=80" alt="School Website" class="project-card-img">
+                        <div class="project-card-body">
+                            <h3>School Website</h3>
+                            <p>A full-featured educational platform built for student and teacher management.</p>
+                            <a href="https://github.com/mohammadnehalalam/School-website" target="_blank" style="display:inline-block;margin-top:14px;padding:7px 18px;background:#0077ff;color:white;border-radius:8px;font-size:0.85rem;font-weight:600;text-decoration:none;">View Code →</a>
+                        </div>
                     </div>
                     
                 </div>
@@ -534,8 +762,8 @@
     <section id="Achievement" class="section-content" style="background: #f1f5f9;">
         <h1 class="section-title reveal">Achievements</h1>
         <div class="grid-3 reveal">
-            <div class="card-common">
-                <img src="OLYMPIAD.jpg" alt="Olympiad" class="achievement-img">
+            <div class="card-common achievement-card">
+                <div class="achievement-img-wrapper"><img src="OLYMPIAD.jpg" alt="Olympiad" class="achievement-img"></div>
                 <div class="achievement-info">
                     <h3>🏆 Olympiads</h3>
                     <p>• Bangladesh Biology Olympiad 2nd Runners Up (Regional)</p>
@@ -545,8 +773,8 @@
                 </div>
             </div>
 
-            <div class="card-common">
-                <img src="DARK.png" alt="Dark Sky" class="achievement-img">
+            <div class="card-common achievement-card">
+                <div class="achievement-img-wrapper"><img src="DARK.png" alt="Dark Sky" class="achievement-img"></div>
                 <div class="achievement-info">
                     <h3>⭐ Dark Sky Rising Star Award</h3>
                     <p>Recognized for outstanding efforts in dark sky advocacy and research.</p>
@@ -555,8 +783,8 @@
                 </div>
             </div>
 
-            <div class="card-common">
-                <img src="PROJECT.JPG" alt="Science Festival" class="achievement-img">
+            <div class="card-common achievement-card">
+                <div class="achievement-img-wrapper"><img src="PROJECT.JPG" alt="Science Festival" class="achievement-img"></div>
                 <div class="achievement-info">
                     <h3>🥈 5th BAFSD National Science Fest</h3>
                     <p>1st Runners Up at Project Display competition.</p>
@@ -631,6 +859,51 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, { threshold: 0.1 });
+
+// Hamburger hide on scroll
+let scrollTimer;
+window.addEventListener('scroll', () => {
+    if (window.innerWidth <= 768 && !sidebar.classList.contains('open')) {
+        hamburger.style.opacity = '0';
+        hamburger.style.pointerEvents = 'none';
+        clearTimeout(scrollTimer);
+        scrollTimer = setTimeout(() => {
+            hamburger.style.opacity = '1';
+            hamburger.style.pointerEvents = 'auto';
+        }, 800);
+    }
+});
+
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const overlay = document.getElementById('sidebarOverlay');
+
+function openSidebar() {
+    sidebar.classList.add('open');
+    overlay.classList.add('active');
+    hamburger.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeSidebar() {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+    sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+});
+
+overlay.addEventListener('click', closeSidebar);
+
+sidebar.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) closeSidebar();
+    });
+});
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
