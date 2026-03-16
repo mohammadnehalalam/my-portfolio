@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Light Pollution Research | Mohammad Nehal Alam</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+    html { scroll-behavior: smooth; }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', 'Segoe UI', sans-serif;
+    }
+
+    body {
+        background: #0f172a;
+        color: #f8fafc;
+        overflow-x: hidden;
+    }
+
+    /* TOPBAR */
+    .topbar {
+        background: #0f172a;
+        border-bottom: 3px solid #0077ff;
+        padding: 16px 60px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .topbar-logo {
+        font-weight: 900;
+        font-size: 1.4rem;
+        color: #f8fafc;
+        text-decoration: none;
+    }
+
+    .back-btn {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: #38bdf8;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: 0.3s;
+    }
+
+    .back-btn:hover { color: #ffffff; }
+
+    /* HERO BANNER */
+    .project-hero {
+        height: 420px;
+        background-image: url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?auto=format&fit=crop&w=1600&q=80');
+        background-size: cover;
+        background-position: center;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+    }
+
+    .project-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(15,23,42,0.3), rgba(15,23,42,0.97));
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 50px 60px;
+        width: 100%;
+    }
+
+    .project-tag {
+        display: inline-block;
+        background: #0077ff;
+        color: white;
+        font-size: 0.78rem;
+        font-weight: 700;
+        padding: 5px 14px;
+        border-radius: 20px;
+        margin-bottom: 16px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+
+    .hero-content h1 {
+        font-size: 2.6rem;
+        font-weight: 800;
+        color: #f8fafc;
+        margin-bottom: 10px;
+        line-height: 1.2;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+        color: #38bdf8;
+        font-weight: 500;
+    }
+
+    /* MAIN CONTENT */
+    .content-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 70px 40px;
+    }
+
+    /* SECTION BLOCK */
+    .section-block {
+        margin-bottom: 60px;
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .section-block.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .section-block h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #38bdf8;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid rgba(0, 119, 255, 0.3);
+        position: relative;
+        padding-left: 18px;
+    }
+
+    .section-block h2::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 10%;
+        height: 80%;
+        width: 5px;
+        background: #0077ff;
+        border-radius: 10px;
+    }
+
+    .section-block p {
+        font-size: 1rem;
+        color: #cbd5e1;
+        line-height: 1.9;
+        margin-bottom: 16px;
+    }
+
+    /* PROJECT IMAGE */
+    .project-image {
+        width: 100%;
+        border-radius: 16px;
+        overflow: hidden;
+        margin-bottom: 60px;
+        border: 2px solid rgba(0,119,255,0.2);
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .project-image.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .project-image img {
+        width: 100%;
+        height: 340px;
+        object-fit: cover;
+        display: block;
+        filter: brightness(85%) contrast(110%);
+    }
+
+    .image-caption {
+        background: #1e293b;
+        padding: 14px 20px;
+        font-size: 0.88rem;
+        color: #64748b;
+        text-align: center;
+        font-style: italic;
+    }
+
+    /* KEY POINTS */
+    .keypoints-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 10px;
+    }
+
+    .keypoint-card {
+        background: #1e293b;
+        border-radius: 14px;
+        padding: 22px 24px;
+        border-left: 4px solid #0077ff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .keypoint-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 30px rgba(0, 119, 255, 0.15);
+    }
+
+    .keypoint-card .kp-icon {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        display: block;
+    }
+
+    .keypoint-card h4 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #38bdf8;
+        margin-bottom: 6px;
+    }
+
+    .keypoint-card p {
+        font-size: 0.88rem;
+        color: #94a3b8;
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    /* SUPERVISOR CARD */
+    .supervisor-card {
+        background: #1e293b;
+        border-radius: 20px;
+        padding: 35px 40px;
+        display: flex;
+        align-items: center;
+        gap: 28px;
+        border: 1px solid rgba(0, 119, 255, 0.2);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .supervisor-avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #0077ff, #38bdf8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: white;
+        flex-shrink: 0;
+    }
+
+    .supervisor-info h4 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #f8fafc;
+        margin-bottom: 6px;
+    }
+
+    .supervisor-info p {
+        font-size: 0.9rem;
+        color: #94a3b8;
+        margin-bottom: 4px;
+        line-height: 1.5;
+    }
+
+    .supervisor-info .dept {
+        color: #38bdf8;
+        font-weight: 500;
+        font-size: 0.88rem;
+    }
+
+    /* FOOTER */
+    .lp-footer {
+        background: #070f1e;
+        text-align: center;
+        padding: 30px;
+        color: #475569;
+        font-size: 0.88rem;
+        border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .lp-footer a {
+        color: #38bdf8;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    /* ========================= */
+    /* MOBILE RESPONSIVE         */
+    /* ========================= */
+    @media (max-width: 768px) {
+        .topbar {
+            padding: 14px 20px;
+        }
+
+        .topbar-logo {
+            font-size: 1.1rem;
+        }
+
+        .project-hero {
+            height: 300px;
+        }
+
+        .hero-content {
+            padding: 30px 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 1.7rem;
+        }
+
+        .hero-content p {
+            font-size: 0.95rem;
+        }
+
+        .content-wrapper {
+            padding: 40px 20px;
+        }
+
+        .keypoints-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .supervisor-card {
+            flex-direction: column;
+            text-align: center;
+            padding: 28px 20px;
+            gap: 18px;
+        }
+
+        .project-image img {
+            height: 220px;
+        }
+
+        .section-block h2 {
+            font-size: 1.3rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero-content h1 {
+            font-size: 1.4rem;
+        }
+
+        .content-wrapper {
+            padding: 30px 15px;
+        }
+
+        .keypoint-card {
+            padding: 18px;
+        }
+    }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+    <a href="index.html" class="topbar-logo">NEHAL.DEV</a>
+    <a href="index.html#Project" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Portfolio
+    </a>
+</div>
+
+<!-- HERO BANNER -->
+<div class="project-hero">
+    <div class="hero-content">
+        <span class="project-tag">Environmental Research</span>
+        <h1>Light Pollution Research</h1>
+        <p>Assessing Artificial Light Intensity in Dhaka City</p>
+    </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<div class="content-wrapper">
+
+    <!-- Project Overview -->
+    <div class="section-block">
+        <h2>Project Overview</h2>
+        <p>
+            Light pollution — the excessive and misdirected use of artificial light at night — has emerged as one of the most overlooked environmental threats of the modern era. In rapidly urbanizing cities like Dhaka, the relentless spread of artificial lighting across commercial zones, hospitals, markets, and public spaces is fundamentally altering the natural night environment.
+        </p>
+        <p>
+            This research project, conducted by the Falcon X Research Team, set out to systematically assess the intensity of artificial light across key locations in Dhaka City. Using calibrated lux meters, the team collected real-world light intensity data from shops, hospitals, roads, and other high-footfall areas — then rigorously compared those measurements against internationally recognized standards to evaluate the true extent of light pollution in the city.
+        </p>
+        <p>
+            Beyond data collection, the project goes further — identifying patterns, understanding root causes, and designing practical, evidence-based solutions to reduce light pollution while maintaining urban functionality. The goal is not to eliminate artificial lighting, but to make it smarter, more targeted, and less harmful to ecosystems and human health.
+        </p>
+    </div>
+
+    <!-- Project Image -->
+    <div class="project-image">
+        <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&w=1200&q=80" alt="City light pollution at night">
+        <div class="image-caption">Artificial light intensity measurement across urban zones in Dhaka — Falcon X Research Team</div>
+    </div>
+
+    <!-- Methodology -->
+    <div class="section-block">
+        <h2>Research Methodology</h2>
+        <p>
+            The Falcon X Research Team conducted field measurements across multiple categories of locations in Dhaka City — including retail shops, hospitals, transport hubs, and residential streets. Lux meters were used to record artificial light intensity at standardized times and distances to ensure consistency across all data points.
+        </p>
+        <p>
+            Collected data was then benchmarked against internationally accepted standards — including guidelines from the Illuminating Engineering Society (IES) and DarkSky International — to identify locations where light levels significantly exceeded safe or necessary thresholds. Statistical analysis was used to detect patterns and rank zones by pollution severity.
+        </p>
+        <p>
+            The team also conducted surveys to understand the awareness levels of business owners and residents regarding light pollution, which informed the design of targeted public awareness and policy recommendations.
+        </p>
+    </div>
+
+    <!-- Key Points -->
+    <div class="section-block">
+        <h2>Key Points</h2>
+        <div class="keypoints-grid">
+            <div class="keypoint-card">
+                <span class="kp-icon">📊</span>
+                <h4>Data-Driven Assessment</h4>
+                <p>Real lux meter readings collected from shops, hospitals, and major public locations across Dhaka City.</p>
+            </div>
+            <div class="keypoint-card">
+                <span class="kp-icon">🔬</span>
+                <h4>Standard Benchmarking</h4>
+                <p>All collected data was compared against international lighting standards to identify overlit zones and violation levels.</p>
+            </div>
+            <div class="keypoint-card">
+                <span class="kp-icon">🌿</span>
+                <h4>Ecosystem Impact Analysis</h4>
+                <p>Investigated how excessive artificial light disrupts nocturnal wildlife, plant cycles, and urban biodiversity.</p>
+            </div>
+            <div class="keypoint-card">
+                <span class="kp-icon">🧠</span>
+                <h4>Human Health Effects</h4>
+                <p>Examined the link between light pollution and disrupted sleep, melatonin suppression, and long-term health risks in urban populations.</p>
+            </div>
+            <div class="keypoint-card">
+                <span class="kp-icon">💡</span>
+                <h4>Evidence-Based Solutions</h4>
+                <p>Proposed practical, data-backed recommendations including shielded lighting, smart dimming systems, and awareness campaigns.</p>
+            </div>
+            <div class="keypoint-card">
+                <span class="kp-icon">🏙️</span>
+                <h4>Urban Policy Recommendations</h4>
+                <p>Developed policy proposals for Dhaka city planners to integrate responsible lighting guidelines into urban development frameworks.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Supervised By -->
+    <div class="section-block">
+        <h2>Supervised By</h2>
+        <div class="supervisor-card">
+            <div class="supervisor-avatar">FR</div>
+            <div class="supervisor-info">
+                <h4>Dr. Farhadur Reza</h4>
+                <p class="dept">Department of Urban and Regional Planning</p>
+                <p>Jahangirnagar University, Bangladesh</p>
+                <p style="margin-top:10px; font-size:0.85rem; color:#64748b;">Research supervision and academic guidance provided throughout the project lifecycle.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="lp-footer">
+    <p>Part of <a href="index.html">Mohammad Nehal Alam's Portfolio</a> &nbsp;|&nbsp; Falcon X Research Team &nbsp;|&nbsp; &copy; 2026</p>
+</div>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.section-block, .project-image').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
